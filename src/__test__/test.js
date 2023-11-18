@@ -120,20 +120,25 @@ test('testing class MathArrayBuffer: function get set __attack', () => {
 test('testing class MathArrayBuffer: function get set __stoned', () => {
   const magician = new Magician('Ivan', 'Magician');
   magician.attack = 10;
-  magician.stoned = 4;
-  expect(magician.stoned).toBe(3);
+  magician.__stoned = 4;
+  expect(magician.__stoned).toBe(5);
 });
 
 test('testing class MathArrayBuffer: function get set __stoned', () => {
   const magician = new Magician('Ivan', 'Magician');
-  magician.attack = 10;
-  magician.stoned = 4;
-  expect(magician.stoned).toBe(3);
+  magician.cell = 9;
+  expect(magician.__stoned).toBe();
 });
 
-test('testing class MathArrayBuffer: function get set __stoned', () => {
+test('testing class MathArrayBuffer: function get set __cell', () => {
   const magician = new Magician('Ivan', 'Magician');
-  magician.attack = 10;
-  magician.stoned = 9;
-  expect(magician.stoned).toBe(0);
+  magician.__cell = 6;
+  expect(magician.__cell).toBe(6);
+});
+
+test('testing error class MathArrayBuffer: function get set __cell', () => {
+  expect(() => {
+    const magician = new Magician('Ivan', 'Magician');
+    magician.__cell = 60;
+  }).toThrowError('Клетки должны быть от 1 до 10');
 });
