@@ -5,34 +5,47 @@ export class MathArrayBuffer extends Character {
   constructor(name, type) {
     super(name, type);
     this.attackPercent = [100, 90, 80, 70, 60, 50, 40, 30, 20, 10];
+    this._stoned = false;
+    this._attack;
+    this._cell;
   }
 
-  get __cell() {
-    return this.cell;
+  get cell() {
+    return this._cell;
   }
 
-  set __cell(cell) {
-    if (cell <= 0 || cell >= 11) {
+  set cell(value) {
+    if (value <= 0 || value >= 11) {
       throw new Error('Клетки должны быть от 1 до 10');
     }
-    this.cell = cell;
+    this._cell = value;
   }
 
-  get __stoned() {
-    return this.stoned;
+  get stoned() {
+    return this._stoned;
   }
 
-  set __stoned(cell) {
-    this.__cell = cell;
-    this.stoned = Math.round(Math.log(this.cell)) * 5;
+  set stoned(value) {
+    this._stoned = value;
   }
 
-  get __attack() {
-    return this.attack;
+  get attack() {
+    if (this._cell) {
+      this._attack = Math.round((this._attack * this.attackPercent[this._cell - 1]) / 100);
+      this._stoned ? this._attack = this._attack - Math.round(Math.log(this._cell)) * 5 : this._attack;
+    }
+    return this._attack;
   }
 
-  set __attack(cell) {
-    this.__cell = cell;
-    this.attack = Math.round((this.attack * this.attackPercent[this.cell - 1]) / 100);
+  set attack(value) {
+    this._attack = value;
   }
 }
+
+let s = new MathArrayBuffer('Ivan', 'Daemon');
+
+s.cell = 4;
+s.attack = 100;
+s.stoned = false;
+
+console.log(s.attack)

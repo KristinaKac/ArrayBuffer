@@ -113,15 +113,24 @@ test('testing class ArrayBufferConverter: function toString', () => {
 
 test('testing class MathArrayBuffer: function get set __attack', () => {
   const magician = new Magician('Ivan', 'Magician');
-  magician.__attack = 4;
-  expect(magician.__attack).toBe(7);
+  magician.cell = 4;
+  magician.attack = 100;
+  magician.stoned = true;
+  expect(magician.attack).toBe(65);
+});
+
+test('testing class MathArrayBuffer: function get set __attack', () => {
+  const magician = new Magician('Ivan', 'Magician');
+  magician.cell = 4;
+  magician.attack = 100;
+  magician.stoned = false;
+  expect(magician.attack).toBe(70);
 });
 
 test('testing class MathArrayBuffer: function get set __stoned', () => {
   const magician = new Magician('Ivan', 'Magician');
-  magician.attack = 10;
-  magician.__stoned = 4;
-  expect(magician.__stoned).toBe(5);
+  magician.stoned = true;
+  expect(magician.stoned).toBe(true);
 });
 
 test('testing class MathArrayBuffer: function get set __stoned', () => {
@@ -132,13 +141,15 @@ test('testing class MathArrayBuffer: function get set __stoned', () => {
 
 test('testing class MathArrayBuffer: function get set __cell', () => {
   const magician = new Magician('Ivan', 'Magician');
-  magician.__cell = 6;
-  expect(magician.__cell).toBe(6);
+  magician.cell = 6;
+  expect(magician.cell).toBe(6);
 });
 
 test('testing error class MathArrayBuffer: function get set __cell', () => {
   expect(() => {
     const magician = new Magician('Ivan', 'Magician');
-    magician.__cell = 60;
+    magician.cell = 15;
+    magician.attack = 100;
+    magician.stoned = true;
   }).toThrowError('Клетки должны быть от 1 до 10');
 });
