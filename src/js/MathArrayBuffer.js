@@ -41,11 +41,3 @@ export class MathArrayBuffer extends Character {
     this._attack = value;
   }
 }
-
-let s = new MathArrayBuffer('Ivan', 'Daemon');
-
-s.cell = 4;
-s.attack = 100;
-s.stoned = false;
-
-console.log(s.attack)
